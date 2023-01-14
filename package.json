@@ -21,7 +21,11 @@
   "scripts": {
     "dev:server": "nodemon ./server/server.js",
     "populate-db": "node ./server/scripts/populateDatabase.js",
-    "server": "node ./server/server.js"
+    "server": "node ./server/server.js",
+    "startdb": "./startdb.sh start",
+    "stopdb": "./startdb.sh stop",
+    "live": "docker container run --rm -d --mount type=bind,source=$(realpath designs),target=/content,ro=true -p 8080:80 mulekick/serve-static:latest > /tmp/static-container-id",
+    "die": "docker container stop $(cat /tmp/static-container-id) && rm /tmp/static-container-id"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
